@@ -1,6 +1,6 @@
 'use client'
 
-import { Environment, Float, Lightformer, MeshTransmissionMaterial, OrbitControls, PivotControls } from '@react-three/drei';
+import { Environment, Float, Lightformer, MeshTransmissionMaterial, OrbitControls, PivotControls, RoundedBox } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber'
 import { useControls } from 'leva';
 
@@ -9,7 +9,7 @@ export const Canvas3D = () => {
     <Canvas orthographic camera={{ position: [6, -5, 10], zoom: 60 }}>
       <color attach="background" args={['#fef4ef']} />
       <ambientLight />
-      <directionalLight castShadow intensity={0.6} position={[0, 0, 10]} />
+      <directionalLight castShadow intensity={0.6} position={[0, 1000, 1000]} />
       <Scene scale={0.01} />
       <OrbitControls makeDefault />
       <Environment resolution={256}>
@@ -34,7 +34,7 @@ function Scene({ ...props }) {
     resolution: { value: 256, min: 64, max: 2048, step: 64 },
     transmission: { value: 0.95, min: 0, max: 1 },
     roughness: { value: 0.5, min: 0, max: 1, step: 0.01 },
-    clearcoat: { value: 0.1, min: 0, max: 1, step: 0.01 },
+    clearcoat: { value: 0.4, min: 0, max: 1, step: 0.01 },
     clearcoatRoughness: { value: 0.1, min: 0, max: 1, step: 0.01 },
     thickness: { value: 200, min: 0, max: 200, step: 0.01 },
     backsideThickness: { value: 200, min: 0, max: 200, step: 0.01 },
@@ -55,7 +55,7 @@ function Scene({ ...props }) {
           <Shape name="Torus" float={0} color="#fef4ef" config={config} />
         </PivotControls>
         <Shape name="Rectangle 6" color="#FF718F" config={config} position={[-700.64, 343.77, -621.72]} />
-        <Shape name="Rectangle 5" color="#29C1A2" config={config} position={[-458.87, 411.05, -435.92]} />
+        <Shape name="Rectangle 5" color="#29C1A2" config={config} position={[-458.87, 411.05, -330.92]} />
         <Shape name="Rectangle 4" color="#FF9060" config={config} position={[0.66, 47, -435.92]} />
         <Shape name="Rectangle 3" color="#823FFF" config={config} position={[-348.74, -162.23, -167.36]} />
         <Shape name="Rectangle 2" color="skyblue" config={config} position={[242.6, 207, -273.39]} />
@@ -64,14 +64,13 @@ function Scene({ ...props }) {
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function Shape({ float = 300, color, config, ...props }) {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+function Shape({ float = 300, color, config, ...props }: any) {
   return (
     <Float floatIntensity={float} rotationIntensity={0} speed={2}>
-      <mesh renderOrder={100}  {...props}>
-        <boxGeometry args={[500, 500, 100]} />
+      <RoundedBox renderOrder={100} args={[400, 400, 100]} radius={10} {...props}>
         <MeshTransmissionMaterial {...config} color={color} toneMapped={false} />
-      </mesh>
+      </RoundedBox>
     </Float>
   )
 }
