@@ -1,4 +1,14 @@
-This is a [Bun](https://bun.sh/) + [Next.js](https://nextjs.org) + [React Three Fiber](https://github.com/pmndrs/react-three-fiber) project template.
+This is a [Bun](https://bun.sh/) + [Next.js 15 with React 19](https://nextjs.org) + [React Three Fiber](https://github.com/pmndrs/react-three-fiber) project template.
+
+## Dependencies
+
+- next
+- react-three/fiber
+- react-three/drei
+- react-three/postprocessing
+- react-spring/three,
+- zustand
+- leva
 
 ## Getting Started
 
